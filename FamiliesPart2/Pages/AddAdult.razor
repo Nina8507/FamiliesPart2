@@ -1,0 +1,76 @@
+﻿@page "/AddAdult"
+@using FamiliesPart2.Data
+@using FamiliesPart2.Models
+@inject IAdultService AdultService
+@inject NavigationManager NavigationManager
+
+<h3>Add New Adult</h3>
+<EditForm Model="@adultToAdd" OnValidSubmit="@AddNewAdultAsync">
+    <ValidationSummary/>
+    <DataAnnotationsValidator/>
+    <div class="col-sm-4">
+        Adult Id:<br/>
+        <InputNumber @bind-Value="adultToAdd.Id"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        <InputText id="FirstName" class="form-control" placeholder="FirstName"
+                   @bind-Value="adultToAdd.FirstName"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        <InputText id="LastName" class="form-control" placeholder="LastName"
+                   @bind-Value="adultToAdd.LastName"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        <InputText id="HairColor" class="form-control" placeholder="HairColor"
+                   @bind-Value="adultToAdd.HairColor"/>
+    </div>
+    <br/>
+    <div class="col-sm-4">
+        Age:<br/>
+        <InputNumber @bind-Value="adultToAdd.Age"/>
+    </div>
+    <br/>
+    <div class="col-sm-4">
+        Height:<br/>
+        <InputNumber @bind-Value="adultToAdd.Height"/> 
+    </div>
+    <br/>
+    <div class="col-sm-4">
+        Weight:<br/>
+        <InputNumber @bind-Value="adultToAdd.Weight"/> 
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        <InputText id="Sex" class="form-control" placeholder="Sex"
+                   @bind-Value="adultToAdd.Sex"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        <InputText id ="JobTitle" class="form-control" placeholder="JobTitle"
+                   @bind-Value="newJobToAdd.JobTitle"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        Salary:<br/>
+        <InputNumber @bind-Value="newJobToAdd.Salary"/>
+    </div>
+    <br/>
+    <p class="action">
+           <button class="btn btn-outline-dark" type="submit">Create</button>
+       </p>
+</EditForm>
+
+@code {
+    private Adult adultToAdd = new Adult();
+    private Job newJobToAdd = new Job();
+
+    private async Task AddNewAdultAsync()
+    {
+        adultToAdd.JobTitle = newJobToAdd;
+        await AdultService.AddAdultAsync(adultToAdd);
+        NavigationManager.NavigateTo("Adults");
+    }
+}

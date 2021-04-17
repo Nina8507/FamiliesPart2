@@ -1,0 +1,53 @@
+﻿@page "/Families"
+@using FamiliesPart2.Data
+@using FamiliesPart2.Data.FamilyService
+@using FamiliesPart2.Models
+@inject IFamilyService FamilyService
+@inject NavigationManager NavigationManager
+<h3>FamilyPage</h3>
+@if (familiesToShow == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else if (!familiesToShow.Any())
+{
+    <p>
+        <em> No Families register!</em>
+    </p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">House Number</th>
+                <th scope="col">Street Name</th>
+                <th scope="col">Adults</th>
+                <th scope="col">Children</th>
+                <th scope="col">Pets</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var family in familiesToShow)
+    {
+        <tr>
+            <td>@family.HouseNumber</td>
+            <td>@family.StreetName</td>
+            <td>@family.Adults.Count</td>
+            <td>@family.Children.Count</td>
+            <td>@family.Pets.Count</td>
+        </tr>
+    }
+        </tbody>
+    </table>
+}
+@code {
+    private IList<Family> familiesToShow;
+
+    protected override async Task OnInitializedAsync()
+    {
+        familiesToShow = await FamilyService.GetFamiliesAsync();
+    }
+}

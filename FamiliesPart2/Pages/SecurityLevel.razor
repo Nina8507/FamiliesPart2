@@ -1,0 +1,13 @@
+﻿@page "/SecurityLevel"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<AuthorizeView>
+    <h3>Hello @context.User.Identity.Name</h3>
+
+    <h5>Your security level is @context.User.FindFirst(claim => claim.Type.Equals("Role")).Value</h5>
+</AuthorizeView>
+
+
+@code {
+    
+}
