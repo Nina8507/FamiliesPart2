@@ -106,8 +106,7 @@ using System.Security.Claims;
     {
         await base.OnInitializedAsync();
         Console.WriteLine("1********");
-        ClaimsPrincipal user;
-        user = (await AuthStat).User;
+        ClaimsPrincipal user = (await AuthStat).User;
         Console.WriteLine("2********");
         if (!user.Identity.IsAuthenticated)
         {
