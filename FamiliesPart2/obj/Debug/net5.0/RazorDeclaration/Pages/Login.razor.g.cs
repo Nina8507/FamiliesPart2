@@ -107,21 +107,10 @@ using FamiliesPart2.Authentication;
     public async Task PerformLogin() {
         errorMessage = "";
         try {
-            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).
                 ValidateLoginAsync(username, password);
-            if (username.Equals("Jane"))
-            {
-                NavigationManager.NavigateTo("/ManagerView");
-            }
-            else
-            {
-                NavigationManager.NavigateTo("/");
-            }
-            
             username = "";
             password = "";
-
-
         } catch (Exception e) {
             errorMessage = e.Message;
         }

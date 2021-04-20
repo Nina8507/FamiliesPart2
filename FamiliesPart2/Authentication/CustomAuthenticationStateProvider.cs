@@ -32,8 +32,8 @@ namespace FamiliesPart2.Authentication
                     ("sessionStorage.getItem", "currentUser");
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
-                    cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
-                    identity = SetupClaimsForUser(cachedUser);
+                    User temp = JsonSerializer.Deserialize<User>(userAsJson);
+                    await ValidateLoginAsync(temp.Username, temp.Password);
                 }
             }
             else
@@ -44,14 +44,7 @@ namespace FamiliesPart2.Authentication
             ClaimsPrincipal cachedClaimsPrincipal = new ClaimsPrincipal(identity);
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
-
-        private ClaimsIdentity SetupClaimsForUser(User user)
-        {
-            List<Claim> claims = new List<Claim>();
-            ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
-            return identity; 
-        }
-
+        
         public async Task ValidateLoginAsync(string userName, string password)
         {
             Console.WriteLine("Validating log in");
@@ -84,6 +77,14 @@ namespace FamiliesPart2.Authentication
             var user = new ClaimsPrincipal(new ClaimsIdentity());
             await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+        }
+        private ClaimsIdentity SetupClaimsForUser(User user)
+        {
+            List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, user.Username));
+            claims.Add(new Claim("Role", user.Role));
+            ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
+            return identity; 
         }
     }
 }
