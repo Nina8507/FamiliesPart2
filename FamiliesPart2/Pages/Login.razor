@@ -1,5 +1,4 @@
 ﻿@page "/Login"
-@namespace FamiliesPart2.Pages
 @using FamiliesPart2.Authentication
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
@@ -41,6 +40,7 @@
         } catch (Exception e) {
             errorMessage = e.Message;
         }
+        
     }
 
     public async Task PerformLogout() {

@@ -1,4 +1,9 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@using FamiliesPart2.Authentication
+@using FamiliesPart2.Data
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider StateProvider
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">FamiliesPart2</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>

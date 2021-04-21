@@ -82,6 +82,20 @@ using FamiliesPart2.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 1 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\NavMenu.razor"
+using FamiliesPart2.Authentication;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\NavMenu.razor"
+using FamiliesPart2.Data;
+
+#line default
+#line hidden
+#nullable disable
     public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -90,7 +104,7 @@ using FamiliesPart2.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 71 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\NavMenu.razor"
+#line 76 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
@@ -105,6 +119,8 @@ using FamiliesPart2.Shared;
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider StateProvider { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
     }
 }
 #pragma warning restore 1591

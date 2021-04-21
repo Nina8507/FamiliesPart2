@@ -83,7 +83,7 @@ using FamiliesPart2.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Login.razor"
+#line 2 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Login.razor"
 using FamiliesPart2.Authentication;
 
 #line default
@@ -98,7 +98,7 @@ using FamiliesPart2.Authentication;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 29 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Login.razor"
+#line 28 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Login.razor"
        
     private string username;
     private string password;
@@ -114,6 +114,7 @@ using FamiliesPart2.Authentication;
         } catch (Exception e) {
             errorMessage = e.Message;
         }
+        
     }
 
     public async Task PerformLogout() {

@@ -9,19 +9,22 @@ namespace FamiliesPart2.Data.UserService
 {
     public class UserService:IUserService
     {
+        private readonly HttpClient client = new HttpClient();
         public async  Task<User> ValidateLoginAsync(string username, string password)
         {
-            HttpClient client = new HttpClient();
             HttpResponseMessage responseMessage = await client.GetAsync
                 ($"https://localhost:5001/users?username={username}&password={password}");
             if (responseMessage.StatusCode == HttpStatusCode.OK)
             {
                 string userAsJson = await responseMessage.Content.ReadAsStringAsync();
-                User resultUser = JsonSerializer.Deserialize<User>(userAsJson);
+                User resultUser = JsonSerializer.Deserialize<User>(userAsJson, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
                 return resultUser;
             }
 
-            throw new Exception("User not found!");
+            throw new Exception($"{await responseMessage.Content.ReadAsStringAsync()}");
         }
     }
 }

@@ -82,13 +82,6 @@ using FamiliesPart2.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 1 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\MainLayout.razor"
-using System.Security.Claims;
-
-#line default
-#line hidden
-#nullable disable
     public partial class MainLayout : LayoutComponentBase
     {
         #pragma warning disable 1998
