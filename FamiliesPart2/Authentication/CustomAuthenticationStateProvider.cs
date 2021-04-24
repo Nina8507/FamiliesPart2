@@ -45,17 +45,17 @@ namespace FamiliesPart2.Authentication
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
         
-        public async Task ValidateLoginAsync(string userName, string password)
+        public async Task ValidateLoginAsync(string username, string password)
         {
             Console.WriteLine("Validating log in");
             
-            if (string.IsNullOrEmpty(userName)) throw new Exception("Enter username");
+            if (string.IsNullOrEmpty(username)) throw new Exception("Enter username");
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
 
             ClaimsIdentity identity = new ClaimsIdentity();
             try
             {
-                User user = await userService.ValidateLoginAsync(userName, password);
+                User user = await userService.ValidateLoginAsync(username, password);
                 identity = SetupClaimsForUser(user);
                 string serializedData = JsonSerializer.Serialize(user);
                 await jsRuntime.InvokeVoidAsync
@@ -64,6 +64,7 @@ namespace FamiliesPart2.Authentication
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 throw e;
             }
             

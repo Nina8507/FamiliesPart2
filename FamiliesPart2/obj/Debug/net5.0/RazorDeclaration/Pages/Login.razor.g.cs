@@ -111,7 +111,9 @@ using FamiliesPart2.Authentication;
                 ValidateLoginAsync(username, password);
             username = "";
             password = "";
+            NavigationManager.NavigateTo("/SecurityLevel");
         } catch (Exception e) {
+            Console.WriteLine(e.StackTrace);
             errorMessage = e.Message;
         }
         

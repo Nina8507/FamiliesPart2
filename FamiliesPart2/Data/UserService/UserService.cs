@@ -19,7 +19,7 @@ namespace FamiliesPart2.Data.UserService
                 string userAsJson = await responseMessage.Content.ReadAsStringAsync();
                 User resultUser = JsonSerializer.Deserialize<User>(userAsJson, new JsonSerializerOptions
                 {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    PropertyNameCaseInsensitive = true
                 });
                 return resultUser;
             }

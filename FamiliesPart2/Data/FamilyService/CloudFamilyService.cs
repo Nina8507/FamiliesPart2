@@ -20,7 +20,7 @@ namespace FamiliesPart2.Data.Imp
 
         public async Task<IList<Family>> GetFamiliesAsync()
         {
-            HttpResponseMessage response = await _client.GetAsync(uri + "/families");
+           /* HttpResponseMessage response = await _client.GetAsync(uri + $"/families");
 
             if (response.IsSuccessStatusCode)
             {
@@ -34,10 +34,17 @@ namespace FamiliesPart2.Data.Imp
             string result = await response.Content.ReadAsStringAsync();
             IList<Family> families = JsonSerializer.Deserialize<IList<Family>>(result, new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNameCaseInsensitive = true
             });
 
-            return families;
+            return families;*/
+           Task<string> stringAsync = _client.GetStringAsync(uri + $"families");
+           string message = await stringAsync;
+           List<Family> result = JsonSerializer.Deserialize<List<Family>>(message, new JsonSerializerOptions
+           {
+               PropertyNameCaseInsensitive = true
+           });
+           return result;
         }
     }
 }

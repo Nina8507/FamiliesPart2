@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using FamiliesPart2.Models;
 
-namespace FamiliesPart2.Data.Imp
+namespace FamiliesPart2.Data.AdultService
 {
     public class CloudAdultService:IAdultService
     {
@@ -19,19 +19,18 @@ namespace FamiliesPart2.Data.Imp
         }
         public async Task<IList<Adult>> GetAllAdultsAsync()
         {
-            HttpResponseMessage responseMessage = await _client.GetAsync(uri + "/adults");
+            HttpResponseMessage responseMessage = await _client.GetAsync($"{uri}/adults");
             if (responseMessage.IsSuccessStatusCode)
             {
-                Console.WriteLine(responseMessage.StatusCode);
-            }
-            else
-            {
-                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                List<Adult> adults = JsonSerializer.Deserialize<List<Adult>>(result, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+                 return adults;
             }
 
-            string result = await responseMessage.Content.ReadAsStringAsync();
-            List<Adult> adults = JsonSerializer.Deserialize<List<Adult>>(result);
-            return adults;
+            throw new Exception("Error in uploading!");
         }
 
         public async Task<Adult> GetAdultAsync(int id)
