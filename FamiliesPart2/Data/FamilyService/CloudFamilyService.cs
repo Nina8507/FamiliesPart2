@@ -38,7 +38,7 @@ namespace FamiliesPart2.Data.Imp
             });
 
             return families;*/
-           Task<string> stringAsync = _client.GetStringAsync(uri + $"families");
+           Task<string> stringAsync = _client.GetStringAsync(uri + $"family");
            string message = await stringAsync;
            List<Family> result = JsonSerializer.Deserialize<List<Family>>(message, new JsonSerializerOptions
            {

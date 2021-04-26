@@ -10,7 +10,7 @@ namespace FamiliesPart2.Data.AdultService
 {
     public class CloudAdultService:IAdultService
     {
-        private string uri = "http://localhost:5001";
+        private string uri = "https://localhost:5001";
         private readonly HttpClient _client;
 
         public CloudAdultService()
@@ -19,7 +19,7 @@ namespace FamiliesPart2.Data.AdultService
         }
         public async Task<IList<Adult>> GetAllAdultsAsync()
         {
-            HttpResponseMessage responseMessage = await _client.GetAsync($"{uri}/adults");
+            HttpResponseMessage responseMessage = await _client.GetAsync("https://localhost:5001/adult");
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();
@@ -35,7 +35,7 @@ namespace FamiliesPart2.Data.AdultService
 
         public async Task<Adult> GetAdultAsync(int id)
         {
-            HttpResponseMessage response = await _client.GetAsync(uri + "/adults/{id}");
+            HttpResponseMessage response = await _client.GetAsync(uri + $"/adult/{id}");
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
@@ -57,7 +57,7 @@ namespace FamiliesPart2.Data.AdultService
             string adultAsJson = JsonSerializer.Serialize(adult);
             HttpContent content = new StringContent(
                 adultAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync(uri + "/adults", content);
+            HttpResponseMessage response = await _client.PostAsync(uri + "/adult", content);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
@@ -70,14 +70,14 @@ namespace FamiliesPart2.Data.AdultService
 
         public async Task RemoveAdultAsync(int adultId)
         {
-            HttpResponseMessage response = await _client.DeleteAsync($"{uri}/adults/{adultId}");
+            HttpResponseMessage response = await _client.DeleteAsync($"{uri}/adult/{adultId}");
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
             }
             else
             {
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
             }
         }
 
