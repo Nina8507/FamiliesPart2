@@ -8,6 +8,7 @@ namespace FamiliesPart2.Models
         public int Id { get; set; }
         [JsonPropertyName("interestType")]
         public string Type { get; set; }
+        [JsonPropertyName("description")]
         public string Description { get; set; }
     }
 }

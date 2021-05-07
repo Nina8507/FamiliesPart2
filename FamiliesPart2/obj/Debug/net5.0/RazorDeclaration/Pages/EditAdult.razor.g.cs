@@ -110,7 +110,7 @@ using FamiliesPart2.Models;
     [Parameter]
     public int Id { get; set; }
 
-    private Adult adultToEdit;
+    private Adult adultToEdit = new Adult();
     protected override async Task OnInitializedAsync()
     {
         adultToEdit = await AdultService.GetByIdAsync(Id);

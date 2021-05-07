@@ -51,9 +51,10 @@ namespace FamiliesPart2.Data.FamilyService
         public async Task AddAsync(Family family)
         {
             string familyAsJson = JsonSerializer.Serialize(family);
-            HttpContent content = new StringContent(
+            StringContent content = new StringContent(
                 familyAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync($"{uri}/Family", content);
+            Console.WriteLine(familyAsJson);
+            HttpResponseMessage response = await _client.PostAsync(uri+"/Family", content);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
@@ -80,7 +81,7 @@ namespace FamiliesPart2.Data.FamilyService
         public async Task UpdateAsync(Family family)
         {
              string familyAsJson = JsonSerializer.Serialize(family);
-             HttpContent content = new StringContent(familyAsJson, Encoding.UTF8, "application/json");
+             StringContent content = new StringContent(familyAsJson, Encoding.UTF8, "application/json");
              HttpResponseMessage response = await _client.PatchAsync($"{uri}/Family/{family.Id}", content);
              if (response.IsSuccessStatusCode)
              {

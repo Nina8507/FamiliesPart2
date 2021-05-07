@@ -107,25 +107,26 @@ using FamiliesPart2.Models;
 #nullable restore
 #line 75 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Adults.razor"
        
-    private IList<Adult> adultsToShow = new List<Adult>();
-    private IList<Adult> adults;
-    private string filterByName;
+    private IList<Adult> _adultsToShow = new List<Adult>();
+    private IList<Adult> _adults = new List<Adult>();
+    private string _filterByName;
     
     protected override async Task OnInitializedAsync()
     {
-        adultsToShow = await AdultService.GetAllAsync();
+        _adults = await _adultService.GetAllAsync();
+        _adultsToShow = _adults;
     }
 
     private void Filter(ChangeEventArgs changeEventArgs)
     {
-        filterByName = null;
+        _filterByName = null;
         try
         {
-            filterByName = changeEventArgs.Value.ToString();
+            _filterByName = changeEventArgs.Value.ToString();
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(e.StackTrace);
             throw;
         }
         ExecuteFilter();
@@ -133,28 +134,27 @@ using FamiliesPart2.Models;
 
     private void ExecuteFilter()
     {
-        adultsToShow = adults.Where(a => a.FirstName.Equals(filterByName)).ToList();
+        _adultsToShow = _adults.Where(a => a.FirstName.Equals(_filterByName)).ToList();
     }
 
     private async Task RemoveAdultAsync(int adultId)
     {
-        Adult adultToRemove = adults.First(a => a.Id == adultId);
-        await AdultService.RemoveAsync(adultId);
-        adultsToShow.Remove(adultToRemove);
-        adults.Remove(adultToRemove);
+        Adult adultToRemove = _adults.First(a => a.Id == adultId);
+        await _adultService.RemoveAsync(adultId);
+        _adultsToShow.Remove(adultToRemove);
+        _adults.Remove(adultToRemove);
     }
 
     private async Task EditAdultAsync(int adultId)
     {
-        NavigationManager.NavigateTo($"EditAdult/{adultId}");
+        _navigationManager.NavigateTo($"EditAdult/{adultId}");
     }
-
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IService<Adult> AdultService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IService<Adult> _adultService { get; set; }
     }
 }
 #pragma warning restore 1591

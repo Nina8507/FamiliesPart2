@@ -43,7 +43,7 @@ else
     </table>
 }
 @code {
-    private IList<Family> _familiesToShow;
+    private IList<Family> _familiesToShow = new List<Family>();
 
     protected override async Task OnInitializedAsync()
     {

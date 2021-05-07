@@ -19,11 +19,11 @@ namespace FamiliesPart2.Data.AdultService
         }
         public async Task<IList<Adult>> GetAllAsync()
         {
-            HttpResponseMessage responseMessage = await _client.GetAsync("https://localhost:5001/adult");
+            HttpResponseMessage responseMessage = await _client.GetAsync("https://localhost:5001/Adult");
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();
-                List<Adult> adults = JsonSerializer.Deserialize<List<Adult>>(result, new JsonSerializerOptions
+                IList<Adult> adults = JsonSerializer.Deserialize<IList<Adult>>(result, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 });
@@ -85,24 +85,8 @@ namespace FamiliesPart2.Data.AdultService
         public async Task UpdateAsync(Adult adult)
         {
             string adultAsJson = JsonSerializer.Serialize(adult);
-            HttpContent content = new StringContent(adultAsJson, Encoding.UTF8, "application/json");
+            StringContent content = new StringContent(adultAsJson, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _client.PatchAsync($"{uri}/Adult/{adult.Id}", content);
-            if (response.IsSuccessStatusCode)
-            {
-                Console.WriteLine(response.StatusCode);
-            }
-            else
-            {
-                Console.WriteLine($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
-            }
-        }
-
-        public async Task AddAdultAsync(Adult adult, Job job)
-        {
-            string adultAsJson = JsonSerializer.Serialize(adult);
-            HttpContent content = new StringContent(
-                adultAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync(uri + $"/Adult?firstName{adult.FirstName}&lastName{adult.LastName}", content);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);

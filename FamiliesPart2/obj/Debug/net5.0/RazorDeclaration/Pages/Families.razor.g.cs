@@ -107,7 +107,7 @@ using FamiliesPart2.Models;
 #nullable restore
 #line 45 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Families.razor"
        
-    private IList<Family> _familiesToShow;
+    private IList<Family> _familiesToShow = new List<Family>();
 
     protected override async Task OnInitializedAsync()
     {
