@@ -1,8 +1,8 @@
 ﻿@page "/AddAdult"
 @using FamiliesPart2.Data
 @using FamiliesPart2.Models
-@inject IAdultService AdultService
-@inject NavigationManager NavigationManager
+@inject IService<Adult> _adultService
+@inject NavigationManager _navigationManager
 
 <h3>Add New Adult</h3>
 <EditForm Model="@adultToAdd" OnValidSubmit="@AddNewAdultAsync">
@@ -70,7 +70,7 @@
     private async Task AddNewAdultAsync()
     {
         adultToAdd.JobTitle = newJobToAdd;
-        await AdultService.AddAdultAsync(adultToAdd);
-        NavigationManager.NavigateTo("Adults");
+        await _adultService.AddAsync(adultToAdd);
+        _navigationManager.NavigateTo("/Adults");
     }
 }

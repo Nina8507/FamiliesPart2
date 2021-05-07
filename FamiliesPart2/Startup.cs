@@ -3,8 +3,8 @@ using FamiliesPart2.Authentication;
 using FamiliesPart2.Data;
 using FamiliesPart2.Data.AdultService;
 using FamiliesPart2.Data.FamilyService;
-using FamiliesPart2.Data.Imp;
 using FamiliesPart2.Data.UserService;
+using FamiliesPart2.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -30,16 +30,17 @@ namespace FamiliesPart2
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<IFamilyService, CloudFamilyService>();
-            services.AddScoped<IAdultService, CloudAdultService>();
+            services.AddScoped<IService<Family>, CloudFamilyService>();
+            services.AddScoped<IService<Adult>, CloudAdultService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IService<User>, UserService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("MustBeManager", policy =>
-                    policy.RequireAuthenticatedUser().RequireClaim("Role", "Manager"));
-                options.AddPolicy("MustBeAnalyst", policy => 
-                    policy.RequireAuthenticatedUser().RequireClaim("Role", "Analyst"));
+                    policy.RequireAuthenticatedUser().RequireClaim("Role", "manager"));
+                options.AddPolicy("", policy => 
+                    policy.RequireAuthenticatedUser().RequireClaim("Role", ""));
             });
         }
 

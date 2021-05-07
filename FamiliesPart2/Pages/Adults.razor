@@ -1,7 +1,7 @@
 ﻿@page "/Adults"
 @using FamiliesPart2.Data
 @using FamiliesPart2.Models
-@inject IAdultService AdultService
+@inject IService<Adult> AdultService
 @inject NavigationManager NavigationManager
 
 <h3>Adults</h3>
@@ -73,13 +73,13 @@ else
 }
 
 @code {
-    private IList<Adult> adultsToShow;
+    private IList<Adult> adultsToShow = new List<Adult>();
     private IList<Adult> adults;
     private string filterByName;
     
     protected override async Task OnInitializedAsync()
     {
-        adultsToShow = await AdultService.GetAllAdultsAsync();
+        adultsToShow = await AdultService.GetAllAsync();
     }
 
     private void Filter(ChangeEventArgs changeEventArgs)
@@ -105,7 +105,7 @@ else
     private async Task RemoveAdultAsync(int adultId)
     {
         Adult adultToRemove = adults.First(a => a.Id == adultId);
-        await AdultService.RemoveAdultAsync(adultId);
+        await AdultService.RemoveAsync(adultId);
         adultsToShow.Remove(adultToRemove);
         adults.Remove(adultToRemove);
     }

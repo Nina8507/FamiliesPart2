@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 using FamiliesPart2.Data;
+using FamiliesPart2.Data.UserService;
 using FamiliesPart2.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;

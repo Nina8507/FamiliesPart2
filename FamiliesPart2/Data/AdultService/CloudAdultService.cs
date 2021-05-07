@@ -8,7 +8,7 @@ using FamiliesPart2.Models;
 
 namespace FamiliesPart2.Data.AdultService
 {
-    public class CloudAdultService:IAdultService
+    public class CloudAdultService:IService<Adult>
     {
         private string uri = "https://localhost:5001";
         private readonly HttpClient _client;
@@ -17,7 +17,7 @@ namespace FamiliesPart2.Data.AdultService
         {
             _client = new HttpClient();
         }
-        public async Task<IList<Adult>> GetAllAdultsAsync()
+        public async Task<IList<Adult>> GetAllAsync()
         {
             HttpResponseMessage responseMessage = await _client.GetAsync("https://localhost:5001/adult");
             if (responseMessage.IsSuccessStatusCode)
@@ -33,9 +33,9 @@ namespace FamiliesPart2.Data.AdultService
             throw new Exception("Error in uploading!");
         }
 
-        public async Task<Adult> GetAdultAsync(int id)
+        public async Task<Adult> GetByIdAsync(int adultId)
         {
-            HttpResponseMessage response = await _client.GetAsync(uri + $"/adult/{id}");
+            HttpResponseMessage response = await _client.GetAsync(uri + $"/Adult/{adultId}");
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
@@ -52,12 +52,13 @@ namespace FamiliesPart2.Data.AdultService
             return adult;
         }
 
-        public async Task AddAdultAsync(Adult adult)
+        public async Task AddAsync(Adult adult)
         {
             string adultAsJson = JsonSerializer.Serialize(adult);
-            HttpContent content = new StringContent(
+            StringContent content = new StringContent(
                 adultAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync(uri + "/adult", content);
+            Console.WriteLine(adultAsJson);
+            HttpResponseMessage response = await _client.PostAsync(uri + "/Adult", content);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
@@ -68,7 +69,7 @@ namespace FamiliesPart2.Data.AdultService
             }
         }
 
-        public async Task RemoveAdultAsync(int adultId)
+        public async Task RemoveAsync(int adultId)
         {
             HttpResponseMessage response = await _client.DeleteAsync($"{uri}/adult/{adultId}");
             if (response.IsSuccessStatusCode)
@@ -81,11 +82,27 @@ namespace FamiliesPart2.Data.AdultService
             }
         }
 
-        public async Task UpdateAdultAsync(Adult adult)
+        public async Task UpdateAsync(Adult adult)
         {
             string adultAsJson = JsonSerializer.Serialize(adult);
             HttpContent content = new StringContent(adultAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PatchAsync($"{uri}/adult/{adult.Id}", content);
+            HttpResponseMessage response = await _client.PatchAsync($"{uri}/Adult/{adult.Id}", content);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(response.StatusCode);
+            }
+            else
+            {
+                Console.WriteLine($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+            }
+        }
+
+        public async Task AddAdultAsync(Adult adult, Job job)
+        {
+            string adultAsJson = JsonSerializer.Serialize(adult);
+            HttpContent content = new StringContent(
+                adultAsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _client.PostAsync(uri + $"/Adult?firstName{adult.FirstName}&lastName{adult.LastName}", content);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);

@@ -1,17 +1,16 @@
 ﻿@page "/Families"
 @using FamiliesPart2.Data
-@using FamiliesPart2.Data.FamilyService
 @using FamiliesPart2.Models
-@inject IFamilyService FamilyService
-@inject NavigationManager NavigationManager
+@inject IService<Family> _familyService
+@inject NavigationManager _navigationManager
 <h3>FamilyPage</h3>
-@if (familiesToShow == null)
+@if (_familiesToShow == null)
 {
     <p>
         <em>Loading...</em>
     </p>
 }
-else if (!familiesToShow.Any())
+else if (!_familiesToShow.Any())
 {
     <p>
         <em> No Families register!</em>
@@ -30,7 +29,7 @@ else
             </tr>
         </thead>
         <tbody>
-        @foreach(var family in familiesToShow)
+        @foreach(var family in _familiesToShow)
     {
         <tr>
             <td>@family.HouseNumber</td>
@@ -44,10 +43,10 @@ else
     </table>
 }
 @code {
-    private IList<Family> familiesToShow;
+    private IList<Family> _familiesToShow;
 
     protected override async Task OnInitializedAsync()
     {
-        familiesToShow = await FamilyService.GetFamiliesAsync();
+        _familiesToShow = await _familyService.GetAllAsync();
     }
 }

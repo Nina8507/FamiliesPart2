@@ -90,7 +90,7 @@ using FamiliesPart2.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 23 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\MainLayout.razor"
+#line 16 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\MainLayout.razor"
  
  [CascadingParameter]
  protected Task<AuthenticationState> AuthStat { get; set; }

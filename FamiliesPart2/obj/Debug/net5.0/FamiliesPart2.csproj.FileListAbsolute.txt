@@ -57,12 +57,12 @@ C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorD
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\EditAdult.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\Families.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\Login.razor.g.cs
-C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\ManagerView.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\SecurityLevel.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\AddAdult.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\Adults.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\EditAdult.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\Families.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\Login.razor.g.cs
-C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\ManagerView.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\SecurityLevel.razor.g.cs
+C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterUser.razor.g.cs
+C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\RegisterUser.razor.g.cs

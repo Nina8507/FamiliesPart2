@@ -113,15 +113,15 @@ using FamiliesPart2.Models;
     private async Task AddNewAdultAsync()
     {
         adultToAdd.JobTitle = newJobToAdd;
-        await AdultService.AddAdultAsync(adultToAdd);
-        NavigationManager.NavigateTo("Adults");
+        await _adultService.AddAsync(adultToAdd);
+        _navigationManager.NavigateTo("/Adults");
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAdultService AdultService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IService<Adult> _adultService { get; set; }
     }
 }
 #pragma warning restore 1591

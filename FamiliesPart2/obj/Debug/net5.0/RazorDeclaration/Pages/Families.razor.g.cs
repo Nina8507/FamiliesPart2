@@ -91,13 +91,6 @@ using FamiliesPart2.Data;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Families.razor"
-using FamiliesPart2.Data.FamilyService;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 4 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Families.razor"
 using FamiliesPart2.Models;
 
 #line default
@@ -112,20 +105,20 @@ using FamiliesPart2.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 46 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Families.razor"
+#line 45 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Families.razor"
        
-    private IList<Family> familiesToShow;
+    private IList<Family> _familiesToShow;
 
     protected override async Task OnInitializedAsync()
     {
-        familiesToShow = await FamilyService.GetFamiliesAsync();
+        _familiesToShow = await _familyService.GetAllAsync();
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IFamilyService FamilyService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IService<Family> _familyService { get; set; }
     }
 }
 #pragma warning restore 1591

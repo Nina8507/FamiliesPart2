@@ -1,7 +1,7 @@
 ﻿@page "/"
 
-<AuthorizeView Policy="MustBeAnalyst">
-    <h1>Hello, John!</h1>
+<AuthorizeView Policy=" ">
+    <h1>Hello,  @context.User.Identity.Name!</h1>
     
     <h2>Welcome back.</h2>
     

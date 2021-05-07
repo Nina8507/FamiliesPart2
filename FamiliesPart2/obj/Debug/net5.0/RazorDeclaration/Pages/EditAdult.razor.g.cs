@@ -113,12 +113,12 @@ using FamiliesPart2.Models;
     private Adult adultToEdit;
     protected override async Task OnInitializedAsync()
     {
-        adultToEdit = await AdultService.GetAdultAsync(Id);
+        adultToEdit = await AdultService.GetByIdAsync(Id);
     }
 
     private async Task SaveAsync()
     {
-        await AdultService.UpdateAdultAsync(adultToEdit);
+        await AdultService.UpdateAsync(adultToEdit);
         NavigationManager.NavigateTo("/Adults");
     }
 
@@ -126,7 +126,7 @@ using FamiliesPart2.Models;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAdultService AdultService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IService<Adult> AdultService { get; set; }
     }
 }
 #pragma warning restore 1591

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using FamiliesPart2.Models;
 
-namespace FamiliesPart2.Data
+namespace FamiliesPart2.Data.UserService
 {
     public interface IUserService
     {

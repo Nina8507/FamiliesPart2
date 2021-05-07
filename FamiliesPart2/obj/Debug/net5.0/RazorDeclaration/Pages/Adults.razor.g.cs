@@ -107,13 +107,13 @@ using FamiliesPart2.Models;
 #nullable restore
 #line 75 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Adults.razor"
        
-    private IList<Adult> adultsToShow;
+    private IList<Adult> adultsToShow = new List<Adult>();
     private IList<Adult> adults;
     private string filterByName;
     
     protected override async Task OnInitializedAsync()
     {
-        adultsToShow = await AdultService.GetAllAdultsAsync();
+        adultsToShow = await AdultService.GetAllAsync();
     }
 
     private void Filter(ChangeEventArgs changeEventArgs)
@@ -139,7 +139,7 @@ using FamiliesPart2.Models;
     private async Task RemoveAdultAsync(int adultId)
     {
         Adult adultToRemove = adults.First(a => a.Id == adultId);
-        await AdultService.RemoveAdultAsync(adultId);
+        await AdultService.RemoveAsync(adultId);
         adultsToShow.Remove(adultToRemove);
         adults.Remove(adultToRemove);
     }
@@ -154,7 +154,7 @@ using FamiliesPart2.Models;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAdultService AdultService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IService<Adult> AdultService { get; set; }
     }
 }
 #pragma warning restore 1591

@@ -104,7 +104,7 @@ using FamiliesPart2.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 76 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\NavMenu.razor"
+#line 54 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
