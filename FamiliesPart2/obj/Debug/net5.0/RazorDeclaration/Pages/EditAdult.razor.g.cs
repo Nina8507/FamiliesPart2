@@ -105,20 +105,23 @@ using FamiliesPart2.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 32 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\EditAdult.razor"
+#line 34 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\EditAdult.razor"
        
     [Parameter]
     public int Id { get; set; }
 
-    private Adult adultToEdit = new Adult();
+    private Adult _adultToEdit = new Adult();
+    private Job _jobToEdit = new Job();
+    
     protected override async Task OnInitializedAsync()
     {
-        adultToEdit = await AdultService.GetByIdAsync(Id);
+        _adultToEdit.JobTitle = _jobToEdit; 
+        _adultToEdit = await AdultService.GetByIdAsync(Id);
     }
 
     private async Task SaveAsync()
     {
-        await AdultService.UpdateAsync(adultToEdit);
+        await AdultService.UpdateAsync(_adultToEdit);
         NavigationManager.NavigateTo("/Adults");
     }
 

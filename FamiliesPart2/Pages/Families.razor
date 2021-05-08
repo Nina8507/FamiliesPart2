@@ -22,8 +22,8 @@ else if (!_familiesToShow.Any())
                 <th scope="col">House Number</th>
                 <th scope="col">Street Name</th>
                 <th scope="col">Adults</th>
-                <th scope="col">Children</th>
-                <th scope="col">Pets</th>
+             
+              
             </tr>
         </thead>
         <tbody>
@@ -34,15 +34,14 @@ else if (!_familiesToShow.Any())
                 <td>@family.HouseNumber</td>
                 <td>@family.StreetName</td>
                 <td>@family.Adults.Count</td>
-                <td>@family.Children.Count</td>
-                <td>@family.Pets.Count</td>
+                
             </tr>
         }
         </tbody>
     </table>
 
 @code {
-    private IList<Family> _familiesToShow;
+    private IList<Family> _familiesToShow = new List<Family>();
 
     protected override async Task OnInitializedAsync()
     {

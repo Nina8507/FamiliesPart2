@@ -6,23 +6,25 @@
 
 <h3>EditAdult</h3>
 <h5>Edit Adult with id: @Id</h5>
-@if (adultToEdit == null)
+@if (_adultToEdit == null)
 {
     <em>Adult not found!</em>
 }
 else
 {
-    <EditForm Model="@adultToEdit" OnValidSubmit="@SaveAsync">
+    <EditForm Model="@_adultToEdit" OnValidSubmit="@SaveAsync">
         <DataAnnotationsValidator/> <ValidationSummary/>
-        <div class="form-group"> Id:<br/> <InputNumber @bind-Value="adultToEdit.Id"/> </div>
-        <div class="form-group"> First name:<br/> <InputTextArea rows="1" @bind-Value="adultToEdit.FirstName"/> </div>
-        <div class="form-group"> Last name:<br/> <InputTextArea rows="1" @bind-Value="adultToEdit.LastName"/> </div>
-        <div class="form-group"> Hair color:<br/> <InputTextArea rows="1" @bind-Value="adultToEdit.HairColor"/> </div>
-        <div class="form-group"> Eye color:<br/> <InputTextArea rows="1" @bind-Value="adultToEdit.EyeColor"/> </div>
-        <div class="form-group"> Age:<br/> <InputNumber rows="1" @bind-Value="adultToEdit.Age"/> </div>
-        <div class="form-group"> Weight:<br/> <InputNumber rows="1" @bind-Value="adultToEdit.Weight"/> </div>
-        <div class="form-group"> Height:<br/> <InputNumber rows="1" @bind-Value="adultToEdit.Height"/> </div>
-        <div class="form-group"> Sex:<br/> <InputTextArea rows="1" @bind-Value="adultToEdit.Sex"/> </div>
+        <div class="form-group"> Id:<br/> <InputNumber @bind-Value="_adultToEdit.Id"/> </div>
+        <div class="form-group"> First name:<br/> <InputTextArea rows="1" @bind-Value="_adultToEdit.FirstName"/> </div>
+        <div class="form-group"> Last name:<br/> <InputTextArea rows="1" @bind-Value="_adultToEdit.LastName"/> </div>
+        <div class="form-group"> Hair color:<br/> <InputTextArea rows="1" @bind-Value="_adultToEdit.HairColor"/> </div>
+        <div class="form-group"> Eye color:<br/> <InputTextArea rows="1" @bind-Value="_adultToEdit.EyeColor"/> </div>
+        <div class="form-group"> Age:<br/> <InputNumber rows="1" @bind-Value="_adultToEdit.Age"/> </div>
+        <div class="form-group"> Weight:<br/> <InputNumber rows="1" @bind-Value="_adultToEdit.Weight"/> </div>
+        <div class="form-group"> Height:<br/> <InputNumber rows="1" @bind-Value="_adultToEdit.Height"/> </div>
+        <div class="form-group"> Sex:<br/> <InputTextArea rows="1" @bind-Value="_adultToEdit.Sex"/> </div>
+        <div class="form-group"> Job Title:<br/> <InputTextArea rows="1" @bind-Value="_jobToEdit.JobTitle"/> </div>
+        <div class="form-group"> Salary:<br/> <InputNumber rows="1" @bind-Value="_jobToEdit.Salary"/> </div>
         <p class="actions">
             <button class="btn btn-outline-dark" type="submit">Save</button>
         </p>
@@ -33,15 +35,18 @@ else
     [Parameter]
     public int Id { get; set; }
 
-    private Adult adultToEdit = new Adult();
+    private Adult _adultToEdit = new Adult();
+    private Job _jobToEdit = new Job();
+    
     protected override async Task OnInitializedAsync()
     {
-        adultToEdit = await AdultService.GetByIdAsync(Id);
+        _adultToEdit.JobTitle = _jobToEdit; 
+        _adultToEdit = await AdultService.GetByIdAsync(Id);
     }
 
     private async Task SaveAsync()
     {
-        await AdultService.UpdateAsync(adultToEdit);
+        await AdultService.UpdateAsync(_adultToEdit);
         NavigationManager.NavigateTo("/Adults");
     }
 }

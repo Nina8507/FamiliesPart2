@@ -1,0 +1,91 @@
+﻿@page "/AddFamily"
+@using FamiliesPart2.Data
+@using FamiliesPart2.Models
+@inject IService<Family> _service
+@inject NavigationManager _manager
+
+<h3>Add New Family</h3>
+
+<EditForm Model="@famToAdd" OnValidSubmit="@AddNewFamilyAsync">
+    <ValidationSummary/>
+    <DataAnnotationsValidator/>
+    <div class="col-sm-4">
+        Family Id:<br/>
+        <InputNumber @bind-Value="famToAdd.Id"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        <InputText id="StreetName" class="form-control" placeholder="StreetName"
+                   @bind-Value="famToAdd.StreetName"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        House Number: <br/>
+        <InputNumber @bind-Value="famToAdd.HouseNumber"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+        <InputText id="FirstName" class="form-control" placeholder="FirstName"
+                   @bind-Value="newAdultToAdd.FirstName"/>
+    </div>
+    <br/>
+    <div class="col-sm-7">
+            <InputText id="LastName" class="form-control" placeholder="LastName"
+                       @bind-Value="newAdultToAdd.LastName"/>
+        </div>
+    <br/>
+    <div class="col-sm-7">
+            <InputText id="HairColor" class="form-control" placeholder="HairColor"
+                       @bind-Value="newAdultToAdd.HairColor"/>
+        </div>
+        <br/>
+        <div class="col-sm-4">
+            Age:<br/>
+            <InputNumber @bind-Value="newAdultToAdd.Age"/>
+        </div>
+        <br/>
+        <div class="col-sm-4">
+            Height:<br/>
+            <InputNumber @bind-Value="newAdultToAdd.Height"/> 
+        </div>
+        <br/>
+        <div class="col-sm-4">
+            Weight:<br/>
+            <InputNumber @bind-Value="newAdultToAdd.Weight"/> 
+        </div>
+        <br/>
+        <div class="col-sm-7">
+            <InputText id="Sex" class="form-control" placeholder="Sex"
+                       @bind-Value="newAdultToAdd.Sex"/>
+        </div>
+        <br/>
+        <div class="col-sm-7">
+            <InputText id ="JobTitle" class="form-control" placeholder="JobTitle"
+                       @bind-Value="newJobToAdd.JobTitle"/>
+        </div>
+        <br/>
+        <div class="col-sm-7">
+            Salary:<br/>
+            <InputNumber @bind-Value="newJobToAdd.Salary"/>
+        </div>
+        <br/>
+    <p class="action">
+        <button class="btn btn-outline-dark" type="submit">Create</button>
+    </p>
+</EditForm>
+
+@code {
+
+    private Family famToAdd = new Family();
+    private Adult newAdultToAdd = new Adult();
+    private Job newJobToAdd = new Job();
+    
+    private async Task AddNewFamilyAsync()
+    {
+        newAdultToAdd.JobTitle = newJobToAdd; 
+        famToAdd.Adults = new List<Adult> {newAdultToAdd};
+        await _service.AddAsync(famToAdd);
+        _manager.NavigateTo("/Families");
+    }
+
+}

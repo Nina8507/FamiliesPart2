@@ -139,8 +139,8 @@ using FamiliesPart2.Models;
 
     private async Task RemoveAdultAsync(int adultId)
     {
-        Adult adultToRemove = _adults.First(a => a.Id == adultId);
         await _adultService.RemoveAsync(adultId);
+        Adult adultToRemove = _adults.FirstOrDefault(a => a.Id == adultId);
         _adultsToShow.Remove(adultToRemove);
         _adults.Remove(adultToRemove);
     }

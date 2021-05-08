@@ -20,13 +20,20 @@ namespace FamiliesPart2.Data.FamilyService
 
         public async Task<IList<Family>> GetAllAsync()
         {
-            Task<string> stringAsync = _client.GetStringAsync(uri + $"Family");
-           string message = await stringAsync;
-           List<Family> result = JsonSerializer.Deserialize<List<Family>>(message, new JsonSerializerOptions
+            
+            HttpResponseMessage responseMessage = await _client.GetAsync("https://localhost:5001/Family");
+            if (responseMessage.IsSuccessStatusCode)
            {
-               PropertyNameCaseInsensitive = true
-           });
-           return result;
+               string result = await responseMessage.Content.ReadAsStringAsync();
+               Console.WriteLine(result);
+               IList<Family> families = JsonSerializer.Deserialize<IList<Family>>(result, new JsonSerializerOptions
+               {
+                   PropertyNameCaseInsensitive = true
+               });
+               return families;
+           }
+
+           throw new Exception("Error in uploading!");
         }
 
         public async Task<Family> GetByIdAsync(int familyId)
@@ -54,7 +61,7 @@ namespace FamiliesPart2.Data.FamilyService
             StringContent content = new StringContent(
                 familyAsJson, Encoding.UTF8, "application/json");
             Console.WriteLine(familyAsJson);
-            HttpResponseMessage response = await _client.PostAsync(uri+"/Family", content);
+            HttpResponseMessage response = await _client.PostAsync($"https://localhost:5001/Family", content);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);

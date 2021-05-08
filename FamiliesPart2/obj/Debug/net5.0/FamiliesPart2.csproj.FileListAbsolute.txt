@@ -64,7 +64,5 @@ C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\SecurityLevel.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterUser.razor.g.cs
 C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\RegisterUser.razor.g.cs
-C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\RegisterFamily.razor.g.cs
-C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\RegisterFamily.razor.g.cs
-C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\FindUserByUsername.razor.g.cs
-C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\FindUserByUsername.razor.g.cs
+C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\RazorDeclaration\Pages\AddFamily.razor.g.cs
+C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\obj\Debug\net5.0\Razor\Pages\AddFamily.razor.g.cs
