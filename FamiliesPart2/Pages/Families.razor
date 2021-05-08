@@ -16,9 +16,7 @@ else if (!_familiesToShow.Any())
         <em> No Families register!</em>
     </p>
 }
-else
-{
-    <table class="table table-striped">
+<table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">House Number</th>
@@ -29,21 +27,22 @@ else
             </tr>
         </thead>
         <tbody>
-        @foreach(var family in _familiesToShow)
-    {
-        <tr>
-            <td>@family.HouseNumber</td>
-            <td>@family.StreetName</td>
-            <td>@family.Adults.Count</td>
-            <td>@family.Children.Count</td>
-            <td>@family.Pets.Count</td>
-        </tr>
-    }
+        
+        @foreach (var family in _familiesToShow)
+        {
+            <tr>
+                <td>@family.HouseNumber</td>
+                <td>@family.StreetName</td>
+                <td>@family.Adults.Count</td>
+                <td>@family.Children.Count</td>
+                <td>@family.Pets.Count</td>
+            </tr>
+        }
         </tbody>
     </table>
-}
+
 @code {
-    private IList<Family> _familiesToShow = new List<Family>();
+    private IList<Family> _familiesToShow;
 
     protected override async Task OnInitializedAsync()
     {

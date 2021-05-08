@@ -113,8 +113,8 @@ using FamiliesPart2.Models;
     
     protected override async Task OnInitializedAsync()
     {
-        _adults = await _adultService.GetAllAsync();
-        _adultsToShow = _adults;
+        _adultsToShow = await _adultService.GetAllAsync();
+        //_adultsToShow = _adults;
     }
 
     private void Filter(ChangeEventArgs changeEventArgs)

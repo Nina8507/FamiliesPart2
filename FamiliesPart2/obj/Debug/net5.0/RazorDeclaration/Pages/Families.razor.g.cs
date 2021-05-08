@@ -105,9 +105,9 @@ using FamiliesPart2.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 45 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Families.razor"
+#line 44 "C:\Users\const\RiderProjects\FamiliesPart2\FamiliesPart2\Pages\Families.razor"
        
-    private IList<Family> _familiesToShow = new List<Family>();
+    private IList<Family> _familiesToShow;
 
     protected override async Task OnInitializedAsync()
     {

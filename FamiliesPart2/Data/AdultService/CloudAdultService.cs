@@ -20,9 +20,11 @@ namespace FamiliesPart2.Data.AdultService
         public async Task<IList<Adult>> GetAllAsync()
         {
             HttpResponseMessage responseMessage = await _client.GetAsync("https://localhost:5001/Adult");
+            Console.WriteLine(responseMessage.Content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();
+                Console.WriteLine(result);
                 IList<Adult> adults = JsonSerializer.Deserialize<IList<Adult>>(result, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
@@ -35,7 +37,7 @@ namespace FamiliesPart2.Data.AdultService
 
         public async Task<Adult> GetByIdAsync(int adultId)
         {
-            HttpResponseMessage response = await _client.GetAsync(uri + $"/Adult/{adultId}");
+            HttpResponseMessage response = await _client.GetAsync(uri + "/Adult/{adultId}");
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
@@ -71,7 +73,7 @@ namespace FamiliesPart2.Data.AdultService
 
         public async Task RemoveAsync(int adultId)
         {
-            HttpResponseMessage response = await _client.DeleteAsync($"{uri}/adult/{adultId}");
+            HttpResponseMessage response = await _client.DeleteAsync(uri +"/Adult/{adultId}");
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
@@ -86,7 +88,7 @@ namespace FamiliesPart2.Data.AdultService
         {
             string adultAsJson = JsonSerializer.Serialize(adult);
             StringContent content = new StringContent(adultAsJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PatchAsync($"{uri}/Adult/{adult.Id}", content);
+            HttpResponseMessage response = await _client.PatchAsync(uri +"/Adult/{adult.Id}", content);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);

@@ -37,7 +37,7 @@ namespace FamiliesPart2.Data.UserService
 
         public async Task<IList<User>> GetAllAsync()
         {
-            HttpResponseMessage responseMessage = await _client.GetAsync("https://localhost:5001/User");
+            HttpResponseMessage responseMessage = await _client.GetAsync("https://localhost:5001/User/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 string result = await responseMessage.Content.ReadAsStringAsync();

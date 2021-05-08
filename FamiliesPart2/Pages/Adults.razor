@@ -5,7 +5,7 @@
 @inject NavigationManager _navigationManager
 
 <h3>Adults</h3>
-<p>Search by First Name:<input type="text" @oninput="@((arg) => Filter(arg))" 
+<p>Search by First Name:<input type="text" @oninput="@(Filter)" 
                                style="width: 200px"/>
 </p>
 
@@ -21,51 +21,51 @@ else if (!_adultsToShow.Any())
         <em>No adults registred!</em>
     </p>
 }
-else 
+else
 {
-<table class="table table-striped">
+    <table class="table table-striped">
         <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Hair Color</th>
-                <th scope="col">Age</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Height</th>
-                <th scope="col">Sex</th>
-                <th scope="col">Job Title</th>
-                <th scope="col">Salary</th>
-            </tr>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Hair Color</th>
+            <th scope="col">Age</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Height</th>
+            <th scope="col">Sex</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Salary</th>
+        </tr>
         </thead>
         <tbody>
-        @foreach (var adult in _adultsToShow)
+        @foreach (var a in _adultsToShow)
         {
             <tr>
-                <td>@adult.Id</td>
-                <td>@adult.FirstName</td>
-                <td>@adult.LastName</td>
-                <td>@adult.HairColor</td>
-                <td>@adult.Age</td>
-                <td>@adult.Weight</td>
-                <td>@adult.Height</td>
-                <td>@adult.Sex</td>
-                <td>@adult.JobTitle.JobTitle</td>
-                <td>@adult.JobTitle.Salary</td>
-                
+                <td>@a.Id</td>
+                <td>@a.FirstName</td>
+                <td>@a.LastName</td>
+                <td>@a.HairColor</td>
+                <td>@a.Age</td>
+                <td>@a.Weight</td>
+                <td>@a.Height</td>
+                <td>@a.Sex</td>
+                <td>@a.JobTitle.JobTitle</td>
+                <td>@a.JobTitle.Salary</td>
+
                 <AuthorizeView Policy="MustBeManager">
                     <td>
-                        <button @onclick="@(() => RemoveAdultAsync(adult.Id))">
+                        <button @onclick="@(() => RemoveAdultAsync(a.Id))">
                             <i class="oi oi-trash" style="color: red"/>
                         </button>
                     </td>
                     <td>
-                        <button @onclick="() => EditAdultAsync(adult.Id)">
+                        <button @onclick="() => EditAdultAsync(a.Id)">
                             <i class="oi oi-pencil" style="color: #2efff8"></i>
                         </button>
                     </td>
                 </AuthorizeView>
-                
+
             </tr>
         }
         </tbody>
@@ -79,8 +79,8 @@ else
     
     protected override async Task OnInitializedAsync()
     {
-        _adults = await _adultService.GetAllAsync();
-        _adultsToShow = _adults;
+        _adultsToShow = await _adultService.GetAllAsync();
+        //_adultsToShow = _adults;
     }
 
     private void Filter(ChangeEventArgs changeEventArgs)
